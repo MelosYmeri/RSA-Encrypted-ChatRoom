@@ -63,4 +63,21 @@ def recieve():
 			publicKeys.append(key.encode('ISO-8859-1'))	
 		for pk in publicKeys:	
 			broadcast(('RECEIVE_KEY' + (245*'x')).encode('ISO-8859-1'))
+            #print(pk)
+			time.sleep(0.5)
+			broadcast(pk)
+			time.sleep(0.5)
 
+		print(f"emri i klientit është {name}!")
+		broadcast_msg = f"{name} iu bashkua bisedës!"
+		extra = 256 - len(broadcast_msg)
+		broadcast_msg = broadcast_msg + extra*'x'
+		time.sleep(1)
+		
+		broadcast(broadcast_msg.encode('ISO-8859-1'))
+		
+		thread = thr.Thread(target = handle, args = (client,))
+		thread.start()
+
+print("Serveri po funksionon")
+recieve()
