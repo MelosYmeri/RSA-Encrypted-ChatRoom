@@ -45,3 +45,4 @@ def receive():
 					msg = decoded_Msg[:-15]	
 					if msg.encode('ISO-8859-1') not in publicKeys:	
 						publicKeys.append(msg.encode('ISO-8859-1'))
+           
