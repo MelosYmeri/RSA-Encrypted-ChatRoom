@@ -8,7 +8,6 @@ HOST = '127.0.0.1' # Ndrysho hostin
 PORT = 55543
 publicKey, privateKey = rsa.newkeys(2048)
 publicKeys = []
-caesar_Key = 69
 header_Size = 10
 
 def turn_pub_key_to_string(pub_key):
