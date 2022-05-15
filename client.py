@@ -4,6 +4,13 @@ import PySimpleGUI as sg
 import rsa
 from rsa import PublicKey
 
+HOST = '127.0.0.1' # Ndrysho hostin
+PORT = 55543
+publicKey, privateKey = rsa.newkeys(2048)
+publicKeys = []
+caesar_Key = 69
+header_Size = 10
+
 def turn_pub_key_to_string(pub_key):
 	a = str(pub_key['n'])
 	b = str(pub_key['e'])
