@@ -2,6 +2,23 @@ import socket
 import threading as thr
 import time
 
+#local host
+#host = 'server.srikar.tech' # Ndrysho hostin
+host = '192.168.178.34'
+port = 55543
+print(host,port)
+header_Size = 10
+publicKeys = []
+# internet, TCP protocol
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+# lidhja e serverit me local host
+server.bind((host, port))
+# kërkon klientët
+server.listen()
+names = []
+clients = []
+
 def broadcast(message):
 	for client in clients:
 		client.send(message) # Dërgon një mesazh për të gjithë
