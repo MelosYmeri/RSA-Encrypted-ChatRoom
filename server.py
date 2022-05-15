@@ -44,4 +44,23 @@ def handle(client):
 			broadcast(broadcast_msg.encode('ISO-8859-1'))
 			names.remove(name)
 			break
+				
+def recieve():	
+	while True:	
+		client, address = server.accept()	
+		print(f"I lidhur me {str(address)}")	
+		client.send(('NAME' + str(252*'x')).encode('ISO-8859-1'))	
+		try:	
+			name = client.recv(1024).decode('ISO-8859-1')	
+			names.append(name)	
+		except:	
+			pass	
+		clients.append(client)	
+		client.send(('COLLECT_KEY' + 245*'x').encode('ISO-8859-1'))	
+		key = client.recv(623)	
+		key = key.decode('ISO-8859-1') + "420420420696969"	
+		if key.encode('ISO-8859-1') not in publicKeys:	
+			publicKeys.append(key.encode('ISO-8859-1'))	
+		for pk in publicKeys:	
+			broadcast(('RECEIVE_KEY' + (245*'x')).encode('ISO-8859-1'))
 
