@@ -26,3 +26,22 @@ def has_alpha(s):
 		if character.isalpha():
 			return True
 	return False
+	
+def receive():	
+	while True:	
+		try:	
+			message = client.recv(256)	
+			decoded_Msg = message.decode('ISO-8859-1')	
+			if 'NAME' in decoded_Msg:	
+				client.send(name.encode('ISO-8859-1'))	
+				print('Lidhja me serverin eshte kryer me sukses!')	
+				pass	
+			elif 'COLLECT_KEY' in decoded_Msg:	
+				client.send(turn_pub_key_to_string(publicKey))	
+			elif 'RECEIVE_KEY' in decoded_Msg:	
+				msg = client.recv(638)	
+				decoded_Msg = msg.decode('ISO-8859-1')	
+				if decoded_Msg[-15:] == "420420420696969" and not has_alpha(decoded_Msg):	
+					msg = decoded_Msg[:-15]	
+					if msg.encode('ISO-8859-1') not in publicKeys:	
+						publicKeys.append(msg.encode('ISO-8859-1'))
